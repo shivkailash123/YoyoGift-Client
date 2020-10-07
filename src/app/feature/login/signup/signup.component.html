@@ -1,0 +1,108 @@
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!------ Include the above in your HEAD tag ---------->
+<link rel="stylesheet" href="http://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+
+<div class="container mb-5 mt-5">
+
+<div class="card bg-light">
+<article class="card-body mx-auto" style="max-width: 400px;">
+	<h4 class="card-title mt-3 text-center">Create Account</h4>
+	<p class="text-center">Get started with your free YOYO-GIFT account</p>
+
+	<form  novalidate [formGroup]="myform" (ngSubmit)='onSubmit()'>
+	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input  formControlName="name" name="" class="form-control" placeholder="Full name" type="text" required >
+
+      </div>
+      <div>
+        <div class="alert alert-danger"
+        *ngIf="name.errors && (name.dirty || name.touched)">
+     <p *ngIf="name.errors.required"> Name is required</p>
+     <p *ngIf="name.errors.pattern"> Name Should Not Contains SpecialCharacters & Number</p>
+     <p *ngIf="name.errors.maxlength">Name Should be maximum 30 charcters</p>
+      </div>
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+        </div>
+        <input name="" class="form-control" placeholder="UserName" type="email" formControlName="useremail" required><br>
+        </div>
+   <div>
+    <div class="alert alert-danger"
+    *ngIf="useremail.errors && (useremail.dirty || useremail.touched)">
+ <p *ngIf="useremail.errors.required">User Name is required</p>
+ <p *ngIf="useremail.errors.pattern">User Name Should Not Start Wih Number or SpecialCharacter And Must Contain Only '.',  '_' and Lowercase</p>
+  <p *ngIf="useremail.errors.maxlength">User Name Should Be Maximum 25 Characters</p>
+   </div>
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+    </div>
+		<select class="custom-select" style="max-width: 120px;">
+		    <option selected="">+91</option>
+      </select>
+      <input name="" class="form-control" placeholder="Phone number" type="text" formControlName="userphone" ><br>
+ </div>
+ <div>
+  <div class="alert alert-danger"
+  *ngIf="userphone.errors && (userphone.dirty || userphone.touched)">
+<p *ngIf="userphone.errors.required">PhoneNumber is required</p>
+<p *ngIf="userphone.errors.pattern">PhoneNumber Should be 10-Digits & Starts From 6,7,8,9</p>
+ </div>
+    </div> <!-- form-group// -->
+   <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+        <input class="form-control" placeholder="Create password" type="password" formControlName="userpassword"><br>
+  </div>
+  <div class="form-group input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
+  </div>
+      <input class="form-control" placeholder="Enter Referral Code (Optional)" type="referralCode" formControlName="userreferralCode">
+      <br>
+</div>
+  <div>
+        <div class="alert alert-danger"
+        *ngIf="userpassword.errors && (userpassword.dirty || userpassword.touched)">
+     <p *ngIf="userpassword.errors.required">Password is required</p>
+     <p *ngIf="userpassword.errors.pattern">Password Should be Atleast 8 charcters & Contain One UpperCase,LowerCase,Number required,Special Character($@$!%*?&)</p>
+   </div>
+    </div> <!-- form-group// -->
+ <div class="form-group">
+
+        <button type="submit"  class="btn btn-primary btn-block" [disabled]='!myform.valid' > Create Account &nbsp;
+         <span *ngIf="spinner"> <span class="spinner-border text-sucess"></span></span>
+        </button>
+
+    </div> <!-- form-group// -->
+    <p class="text-center">Have an account? <a routerLink="/profile/login">Log In</a> </p>
+    <div *ngIf="message">
+      <div class="alert alert-warning alert-dismissible">
+        <strong>Ahh!</strong> {{errormessge}}
+      </div>
+    </div>
+    <div *ngIf="success">
+      <div class="alert alert-success alert-dismissible">
+        <strong>Wohoo!</strong> {{errormessge}}
+      </div>
+    </div>
+</form>
+</article>
+
+</div>
+
+
+</div>
+<!--container end.//-->
+
+<router-outlet></router-outlet>

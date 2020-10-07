@@ -1,0 +1,49 @@
+table {
+  width: 100%;
+  background-color: white;
+  box-shadow: 8px 8px 3px #aaaaaa;
+  border: 1px solid #BFBFBF;
+
+}
+.myContent{
+  overflow-x: scroll;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  color: white;
+}
+
+.mat-elevation-z8 {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-right:20px;
+  margin-left: 20px;
+
+
+}
+.mystyle {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+@media (min-width: 600px) {
+  .wrapper {
+    display: flex;
+  }
+  .sidebar {
+    flex:3;
+  }
+  .myContent {
+    flex:7;
+  }
+}
+.example-container {
+  height: 400px;
+  overflow: auto;
+}
+#wrapper1{
+  position: relative;
+
+  overflow:auto;
+}

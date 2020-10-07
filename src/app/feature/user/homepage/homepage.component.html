@@ -1,0 +1,210 @@
+<!-- <a routerLink="/user/payGift">pay</a>
+<router-outlet></router-outlet>
+<a routerLink="/admin">admin</a>
+<a routerLink="/profile">profile</a> -->
+
+<!-- Work from Here -->
+
+<mat-spinner *ngIf="pageLoading" class="m-auto"></mat-spinner>
+
+<div class="d-flex" id="wrapper" *ngIf="!pageLoading">
+
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading mt-2 ml-2">
+      <h4>Filters</h4>
+    </div>
+    <hr>
+    <form [formGroup]="filterMenu">
+      <div class="sidebar-heading mt-2 ml-2">
+        <h5>Categories</h5>
+      </div>
+      <div class="list-group list-group-flush pl-4" id="categories" formArrayName="categories"
+        *ngFor="let category of categoryFormControls.controls let i = index">
+        <mat-checkbox [formControlName]="i">{{categories[i].name}}</mat-checkbox>
+      </div>
+      <hr>
+      <div class="sidebar-heading mt-2 ml-2">
+        <h5>Price</h5>
+      </div>
+      <div class="ml-4">
+        <mat-hint class="text-info">Min : {{minPrice.value}}</mat-hint>
+        <br>
+        <input type="range" class="custom-range w-75" id="customRange1" formControlName="minPrice"
+          [min]="minPriceContainer" [max]="maxPrice.value" [value]="minPrice.value">
+        <br>
+        <mat-hint class="text-info">Max : {{maxPrice.value}}</mat-hint>
+        <br>
+        <input type="range" class="custom-range w-75" id="customRange2" formControlName="maxPrice"
+          [min]="minPrice.value" [max]="maxPriceContainer" [value]="maxPrice.value">
+        <!-- <mat-form-field class="full">
+          <input type="number" matInput placeholder="min price here.." formControlName="minPrice">
+          <mat-hint>Min Price is {{minPrice}}</mat-hint>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full">
+          <input type="number" matInput placeholder="max price here.." formControlName="maxPrice">
+          <mat-hint>Max Price is {{maxPrice}}</mat-hint>
+        </mat-form-field> -->
+      </div>
+      <!-- <div class="ml-4">
+        <mat-form-field class="full">
+          <input type="number" matInput placeholder="max price here.." formControlName="maxPrice">
+          <mat-hint>Max Price is {{maxPrice}}</mat-hint>
+        </mat-form-field>
+      </div> -->
+      <hr>
+      <button class="ml-4 mb-4" color="primary" mat-raised-button (click)="applyFilters()">Apply Filters</button>
+    </form>
+  </div>
+  <div id="page-content-wrapper" class="">
+
+    <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom">
+      <button mat-raised-button color="primary" id="menu-toggle" class="ml-1" (click)="toggleSidenav()">
+        <i class="fa fa-filter"></i>
+        <span class="filterText">&nbsp;Filters</span>
+      </button>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <mat-form-field appearance="legacy" class="ml-3">
+          <input matInput placeholder="enter search key here..." [(ngModel)]="searchString">
+        </mat-form-field>
+        <button mat-raised-button color="warn" class="align-content-end ml-3" (click)="redirectToGiftCard()">
+          <i class="fa fa-gift"></i>
+          &nbsp;&nbsp;Gift Card
+        </button>
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>INFO</h2>
+              <span class="close" (click)="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+              <div class="pt-1 pb-1">
+                You need to login first in order to buy a Gift Card
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="pt-1 pb-1">
+                <button mat-raised-button color="warn" (click)="redirectToLogin()">Go to Login</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid w-100">
+
+      <div class="mt-3">
+        <div class="alert alert-warning" role="alert" *ngIf="errorMessage">
+          <strong>Warning!&nbsp;</strong>{{errorMessage}}
+        </div>
+        <div class="row p-2" *ngIf="products">
+          <div class="col-sm-12 col-md-4 col-lg-3 mb-3" *ngFor="let product of products | productFilter: searchString">
+            <mat-card class="shadow">
+              <mat-card-header>
+                <mat-card-title>{{product.productName}}</mat-card-title>
+                <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image [src]="product.imageUrl" alt="Product" class="cardImage" height="180px">
+              <mat-card-content>
+                <span>
+                  <i class="fa fa-star text-primary mr-1" aria-hidden="true"></i>
+                  <span *ngIf="product.ratingAvg != 0">{{product.ratingAvg}}</span>
+                  <span *ngIf="product.ratingAvg == 0">Not Rated Yet</span>
+                </span>
+                <p *ngIf="product.stock != 0">
+                  <span>Rs. {{product.price | discount: product.discount}} &nbsp;&nbsp;</span>
+                  <span class="originalPrice">Rs. {{product.price}}</span>
+                  <span class="text-info"> &nbsp;&nbsp;{{product.discount}}%</span>
+                </p>
+                <p *ngIf="product.stock == 0">
+                  <span class="text-danger">OUT OF STOCK</span>
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button class="btn-block" color="primary" mat-raised-button
+                  (click)="redirectToProduct(product.productId)">View</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- <script>
+  $("#menu-toggle").click(function (e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
+</script> -->
+
+<!-- Menu Toggle Script -->
+<!--
+<mat-drawer-container [hasBackdrop]="true" class="content" *ngIf="products">
+  <mat-drawer #drawer [mode]="over" class="sideNav pl-3 pt-3" color="primary">
+    <div class="sideNavContent mt-3">
+      <h4>Filters</h4>
+      <hr>
+
+    </div>
+  </mat-drawer>
+
+  <mat-drawer-content class="mainContent">
+
+    <nav class="sticky-top">
+      <button mat-raised-button color="primary" class="ml-3 mt-3" (click)="drawer.toggle()">
+        <i class="fa fa-bars"></i>
+        &nbsp;&nbsp;Filters
+      </button>
+      <mat-form-field appearance="legacy" class="ml-3">
+        <input matInput placeholder="enter search key here..." [(ngModel)]="searchString">
+      </mat-form-field>
+      <button mat-raised-button color="warn" class="align-content-end ml-3">
+        <i class="fa fa-gift"></i>
+        &nbsp;&nbsp;Gift Card
+      </button>
+    </nav>
+
+    <div class="w-100 mt-3">
+      <div class="alert alert-warning" role="alert" *ngIf="errorMessage">
+        <strong>Warning!</strong>{{errorMessage}}
+      </div>
+      <div class="row p-2" *ngIf="products">
+        <div class="col-sm-12 col-md-4 col-lg-3 mb-3" *ngFor="let product of products | productFilter: searchString">
+          <mat-card class="shadow">
+            <mat-card-header>
+              <mat-card-title>{{product.productName}}</mat-card-title>
+              <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="product.imageUrl" alt="Photo of a Shiba Inu" class="cardImage">
+            <mat-card-content>
+              <span><i class="fa fa-star text-primary mr-1" aria-hidden="true"></i>3</span>
+              <p *ngIf="product.stock != 0">
+                <span>Rs. {{product.price | discount: product.discount}} &nbsp;&nbsp;</span>
+                <span class="originalPrice">Rs. {{product.price}}</span>
+                <span class="text-info"> &nbsp;&nbsp;{{product.discount}}%</span>
+              </p>
+              <p *ngIf="product.stock == 0">
+                <span class="text-danger">OUT OF STOCK</span>
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button class="btn-block" mat-raised-button>View</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container> -->

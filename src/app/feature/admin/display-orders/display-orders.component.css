@@ -1,0 +1,108 @@
+.wrapper {
+  width: 100%;
+  min-height: 300px;
+  background-color: rgb(243, 241, 241);
+  padding: 15px;
+  position: relative;
+  --hover-Color: rgb(243, 243, 243);
+  --primary-color: #4360B5;
+  --primary-color-dark: rgb(57, 82, 156);
+}
+
+.stopPage {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1002;
+}
+
+.wrapper .dashboard {
+  width: 100%;
+  height: max-content;
+  position: relative;
+}
+
+.wrapper .content {
+  margin-top: 15px;
+}
+
+.wrapper .content .adminContent .brand {
+  position: relative;
+  top: 15px;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  color: white;
+}
+
+.itemList tr.headerRow {
+  background-color: var(--primary-color);
+}
+
+.itemList tr.headerRow th {
+  color: white;
+}
+
+.itemList tr.dataRow {
+  transition: 0.2s ease-in-out;
+}
+
+.itemList tr.dataRow:hover {
+  background-color: var(--hover-Color);
+}
+
+.itemList {
+  overflow: auto;
+  max-height: 350px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 16%;
+}
+
+
+@media (min-width: 600px) {
+
+  .wrapper {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 23.5% 75%;
+    grid-template-rows: 100%;
+    grid-template-areas:
+      "sidebar mainContent"
+    ;
+  }
+
+  .wrapper .dashboard {
+    grid-area: sidebar;
+  }
+
+  .wrapper .content {
+    grid-area: mainContent;
+    margin-top: 0;
+  }
+
+  .mat-form-field {
+    font-size: 16px;
+    width: 100%;
+  }
+}

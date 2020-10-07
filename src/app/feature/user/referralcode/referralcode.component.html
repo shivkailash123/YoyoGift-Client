@@ -1,0 +1,45 @@
+<div class="wrapper">
+
+  <div class="sidebar" *ngIf="!pageLoading">
+    <app-profile [walletBalance]="redeemedBalance"></app-profile>
+  </div>
+    <div class="main">
+      <h3>Referral Code</h3>
+      <hr />
+      <mat-accordion class="example-headers-align" [formGroup]="group">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Enter the email Id whom you want to refer
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-form-field>
+            <mat-label> Receiver Email</mat-label>
+            <input matInput formControlName="code" />
+            <mat-error *ngIf="group.get('code').hasError('required')"
+              >Email is Required!</mat-error
+            >
+            <mat-error *ngIf="group.get('code').hasError('email')"
+            >Invalid Email!</mat-error
+          >   <mat-error *ngIf="group.get('code').hasError('emailPattern')"
+          >Invalid Email!</mat-error
+        >
+          </mat-form-field>
+          <mat-action-row>
+            <button mat-button color="primary"[disabled]="!isButtonEnabled" (click)="submitEmail()">
+              <span *ngIf="spinner" class="spinner-border spinner-border-sm mr-1"></span>
+              Submit</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <div class="message">
+      <div *ngIf="sucess" class="alert alert-success">
+        <strong><p>{{message}}</p></strong>
+      </div>
+      <div *ngIf="emessage" class="alert alert-danger">
+        <strong><p>{{errorMessage}}</p></strong>
+      </div>
+    </div>
+  </div>
+</div>

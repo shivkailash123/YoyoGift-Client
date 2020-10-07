@@ -1,0 +1,166 @@
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+<div class="container">
+  <h3>General Settings</h3>
+  <hr />
+  <mat-accordion class="example-headers-align" [formGroup]="group">
+    <mat-expansion-panel
+      [expanded]="step === 0"
+      (opened)="setStep(0)"
+      hideToggle
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Name
+        </mat-panel-title>
+        <mat-panel-description>
+          Change your name
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="group.get('name').hasError('required')"
+          >Name is Required!</mat-error
+        >
+        <mat-error *ngIf="group.get('name').hasError('pattern')"
+          >Name Should Not Contains SpecialCharacters & Number</mat-error
+        >
+        <mat-error *ngIf="group.get('name').hasError('maxLength')"
+          >Name Should be maximum 30 charcters</mat-error
+        >
+      </mat-form-field>
+      <mat-action-row>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>&nbsp; &nbsp;
+        <button mat-button color="primary"[disabled]="!group.get('name').valid" (click)="submitUpdateData()">
+          <span *ngIf="spinner" class="spinner-border spinner-border-sm mr-1"></span>
+          Edit</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel
+      [expanded]="step === 1"
+      (opened)="setStep(1)"
+      hideToggle
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Contact
+        </mat-panel-title>
+        <mat-panel-description>
+          Enter the New phone no
+          <mat-icon>phone</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>Phone No</mat-label>
+        <input matInput formControlName="phoneNo" />
+        <mat-error *ngIf="group.get('phoneNo').hasError('required')"
+          >PhoneNumber is required</mat-error
+        >
+        <mat-error *ngIf="group.get('phoneNo').hasError('pattern')"
+          >PhoneNumber Should be 10-Digits & Starts From 6,7,8,9</mat-error
+        >
+      </mat-form-field>
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+        <button mat-button color="primary"[disabled]="!group.get('phoneNo').valid" (click)="submitUpdateData()">
+          <span *ngIf="spinner" class="spinner-border spinner-border-sm mr-1"></span>
+          Edit</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel
+      [expanded]="step === 2"
+      (opened)="setStep(2)"
+      hideToggle
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          New Password
+        </mat-panel-title>
+        <mat-panel-description>
+          Update the previous Password
+          <mat-icon>lock</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <mat-label>New Password</mat-label>
+        <input
+          [type]="hidePassword ? 'password' : 'text'"
+          matInput
+          formControlName="password"
+        />
+        <!-- <button
+          mat-icon-button
+          tabindex="-1"
+          matSuffix
+          (click)="hidePassword = !hidePassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword"
+        >
+          <mat-icon>{{
+            hidePassword ? "visibility_off" : "visisbility"
+          }}</mat-icon>
+        </button> -->
+        <mat-error *ngIf="group.get('password').hasError('required')"
+          >Password Is Required</mat-error
+        >
+        <mat-error *ngIf="group.get('password').hasError('pattern')"
+          >Password Should be Atleast 8 charcters & Contain One
+          UpperCase,LowerCase,Number required,Special
+          Character($@$!%*?&)</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Confirm New Password</mat-label>
+        <input
+          [type]="hidePassword ? 'password' : 'text'"
+          matInput
+          formControlName="confirmPassword"
+        />
+        <!-- <button
+          mat-icon-button
+          tabindex="-1"
+          matSuffix
+          (click)="hidePassword = !hidePassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword"
+        >
+          <mat-icon>{{
+            hidePassword ? "visibility_off" : "visisbility"
+          }}</mat-icon>
+        </button> -->
+        <mat-error *ngIf="group.get('confirmPassword').hasError('required')"
+          >Password Is Required</mat-error
+        >
+        <mat-error *ngIf="group.get('confirmPassword').invalid"
+          >Password must match</mat-error
+        >
+      </mat-form-field>
+      <br /><br /><br />
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()">End</button>
+        <button mat-button color="primary" [disabled]="!checkDisable()" (click)="submitUpdateData()">
+          <span *ngIf="spinner" class="spinner-border spinner-border-sm mr-1"></span>
+         Edit</button>
+      </mat-action-row>
+    </mat-expansion-panel> </mat-accordion
+  ><br />
+
+  <div *ngIf="success" class="alert alert-success alert-dismissible">
+    <strong>{{
+    sucessMessage
+  }}</strong></div>
+  <div *ngIf="message" class="alert alert-danger alert-dismissible">
+    <strong>{{
+    errormessge
+  }}</strong></div>
+  <br /><br />
+</div>

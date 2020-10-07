@@ -1,0 +1,54 @@
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+mat-expansion-panel {
+  width: 80%;
+}
+.content {
+  padding: 20px;
+  width: 100%;
+}
+.wrapper
+{
+  width:100%;
+}
+@media (min-width: 600px) {
+  .wrapper {
+    display: flex;
+  }
+
+  .aside {
+    flex: 3;
+  }
+
+  .main {
+    flex: 7;
+    background-color: var(--secondary-color);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-y: auto;
+  }
+
+  .accordianBox {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 45% 50%;
+    grid-row: 25% 25% 25% 25%;
+  }
+}
+.message
+{
+  width: 80%;
+}

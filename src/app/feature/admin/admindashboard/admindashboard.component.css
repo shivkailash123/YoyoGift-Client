@@ -1,0 +1,187 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(243, 241, 241);
+  padding: 15px;
+  position: relative;
+  --hover-Color: rgb(243, 243, 243);
+  --primary-color: #4360B5;
+  --primary-color-dark: rgb(57, 82, 156);
+}
+
+.stopPage {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1002;
+}
+
+.brand {
+  position: relative;
+  top: 5px;
+}
+
+.content {
+  margin-top: 15px;
+}
+
+.adminContent .brand {
+  justify-content: space-between;
+  display: flex;
+  top: 15px;
+}
+
+.brandHeader {
+  display: flex;
+}
+
+.addButton {
+  position: absolute;
+  right: 15px;
+  top: 7px;
+  transition: 0.2s ease-in-out;
+}
+
+.addButton:hover {
+  cursor: pointer;
+  background-color: var(--primary-color-dark);
+
+}
+
+.iconText {
+  display: none;
+}
+
+.wrapper .dashboard {
+  width: 100%;
+  height: max-content;
+  position: relative;
+}
+
+.wrapper .dashboard .toggleButton {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+}
+
+.list-group-item {
+  border: 0;
+  transition: 0.2s ease-in-out;
+}
+
+.list-group-item:hover {
+  background-color: var(--hover-Color);
+}
+
+.itemList {
+  overflow-x: auto;
+}
+
+.itemList tr.headerRow {
+  background-color: var(--primary-color);
+}
+
+.itemList tr.headerRow th {
+  color: white;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  color: white;
+}
+
+.itemList tr.dataRow {
+  transition: 0.2s ease-in-out;
+}
+
+.itemList tr.dataRow:hover {
+  background-color: var(--hover-Color);
+}
+
+.itemList span {
+  padding: 10px 15px;
+}
+
+.itemList span:hover {
+  cursor: pointer;
+}
+
+.actionIcon {
+  cursor: pointer;
+}
+
+
+.itemList {
+  overflow: auto;
+  max-height: 350px;
+}
+
+
+td,
+th {
+  width: 12%;
+}
+
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .wrapper {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 23.5% 75%;
+    grid-template-rows: 100%;
+    grid-template-areas:
+      "sidebar mainContent"
+    ;
+  }
+
+  .dashboard {
+    grid-area: sidebar;
+  }
+
+  .content {
+    grid-area: mainContent;
+    margin-top: 0;
+  }
+
+  .iconText {
+    display: inline;
+  }
+
+  .toggleButton {
+    display: none;
+  }
+
+  .dashboardList {
+    display: block;
+  }
+
+
+  .mat-form-field {
+    font-size: 16px;
+    width: 100%;
+  }
+
+  .stopPage {
+    height: 100%;
+  }
+
+  #myChart {
+    position: relative;
+    left: -20px;
+  }
+
+}

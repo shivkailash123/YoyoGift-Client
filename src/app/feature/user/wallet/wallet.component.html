@@ -1,0 +1,51 @@
+
+
+
+<div class="center">
+
+  <div class="lds-grid" *ngIf="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+</div>
+
+
+
+
+ <hr> <font color="#4360B5"><marquee >FIVE RUPEE EQUAL ONE YO YO POINT</marquee></font><hr>
+ <div *ngIf="userData">
+<form  class="form-style-9" novalidate [formGroup]="walletDataForm">
+  <div class="alert alert-primary" role="alert" *ngIf="message">
+    <strong>Well done!</strong> {{message}}
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="errormessage">
+    <strong>Oh snap!</strong> {{errormessage}}
+  </div>
+
+  <ul>
+    <li>
+      <p>Wallet Balance: {{userData.wallet}}</p>
+   </li>
+    <li>
+
+
+  <p>Enter Amount:*</p>
+<input for="amount" formControlName="amount" class="field-style" placeholder="Add Amount"
+[ngClass]="{'is-invalid':walletDataForm.get('amount').touched && walletDataForm.get('amount').invalid}">
+<div *ngIf ="walletDataForm.get('amount').touched && walletDataForm.get('amount').invalid" class="invalid-feedback">
+  <div *ngIf="walletDataForm.get('amount').errors.amountCheck1">Amount Should be multiple of 5</div>
+  <div *ngIf="walletDataForm.get('amount').errors.required">Amount is Required</div>
+  <div *ngIf="walletDataForm.get('amount').errors.pattern">Amount Should be greater than 5</div>
+  <div *ngIf="walletDataForm.get('amount').errors.amountCheck">Amount Should be multiple of 5</div>
+  </div>
+
+</li>
+<li>
+  <input type="submit" (click)="onSubmit()" [disabled]="varButton"  value="Add Money"  class="field-style field-split align-left "/>
+  <input type="submit" (click)="back()" [disabled]="varButton"  value="Back"  class="field-style field-split align-right "/>
+</li>
+
+  </ul>
+</form>
+</div>
+
+
+

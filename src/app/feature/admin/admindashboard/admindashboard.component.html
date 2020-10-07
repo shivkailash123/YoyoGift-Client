@@ -1,0 +1,100 @@
+<div class="wrapper">
+  <div *ngIf="pageLoading" class="stopPage">
+    <mat-spinner color="warn"></mat-spinner>
+  </div>
+  <div class="dashboard mat-elevation-z8 rounded bg-white">
+    <app-admin-sidebar></app-admin-sidebar>
+  </div>
+  <div class="content mat-elevation-z8 rounded bg-white">
+    <div class="adminContent">
+      <div class="brand p-2 pl-3">
+        <div class="brandHeader">
+          <div>
+            <h3>Products</h3>
+          </div>
+          <div>
+            <button mat-raised-button color="primary" class="addButton" (click)="redirectToAddProduct()"><i
+                class="fa fa-plus"></i><span class="iconText">&nbsp;&nbsp;Add Product</span></button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="errorMessage" class="p-3">
+        <div class="alert alert-warning" role="alert">
+          <strong>Warning!</strong> {{errorMessage}}
+        </div>
+      </div>
+      <div class="p-3">
+
+        <div class="mat-elevation-z8 itemList">
+          <div class="p-3">
+            <mat-form-field>
+              <mat-label>Search</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="search for orders here...">
+            </mat-form-field>
+          </div>
+
+
+          <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+
+            <ng-container matColumnDef="productId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+              <td mat-cell *matCellDef="let product"> <b>{{product.productId}}</b> </td>
+            </ng-container>
+
+            <ng-container matColumnDef="productName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+              <td mat-cell *matCellDef="let product"> {{product.productName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+              <td mat-cell *matCellDef="let product"> {{product.category}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+              <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="stock">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock </th>
+              <td mat-cell *matCellDef="let product"> {{product.stock}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="discount">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount </th>
+              <td mat-cell *matCellDef="let product"> {{product.discount}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="vendor">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Vendor </th>
+              <td mat-cell *matCellDef="let product"> {{product.vendor}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions </th>
+              <td mat-cell *matCellDef="let product">
+                <span mat-button [matMenuTriggerFor]="menu">
+                  <i class="fa fa-ellipsis-v actionIcon"></i>
+                </span>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item [disabled]="buttonDisable" (click)="redirectToUpdate(product.productId)"><i
+                      class="fa fa-edit"></i>&nbsp;&nbsp;Update</button>
+                  <button mat-menu-item [disabled]="buttonDisable" (click)="openDialog(product.productId)"><i
+                      class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
+                </mat-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="headerRow"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="dataRow"></tr>
+
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 25, 100]" showFirstLastButtons></mat-paginator>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

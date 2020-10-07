@@ -1,0 +1,90 @@
+
+
+
+<!-- To put the spinner in center -->
+<div class="center">
+
+
+  <div class="db-spinner"*ngIf="spinner"></div>
+</div>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>INFO</h2>
+      <span class="close" (click)="closeModal()">&times;</span>
+    </div>
+    <div class="modal-body">
+      <div class="pt-1 pb-1">
+        {{message}}
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="pt-1 pb-1">
+        <button mat-raised-button color="warn" (click)="redirectToHome()">Go to HomePage</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Form Creation -->
+
+<form *ngIf="userData" name="form" class="form-style-9" [formGroup]="giftCardDataForm"  >
+ <!-- Alert for Message Error -->
+  <div class="alert alert-danger" role="alert" *ngIf="messageerror">
+    <strong>Oh snap!</strong> {{messageerror}}
+  </div>
+  <!-- Alert for Mesage -->
+  <div class="alert alert-primary" role="alert" *ngIf="message">
+    <strong>Well done!</strong> {{message}}
+  </div>
+  <ul>
+<li>
+<p>Receiver:</p>
+<input type="text" for="remail" formControlName="remail"  class="field-style field-full align-none" placeholder="Reciver Email"
+[ngClass]="{'is-invalid':giftCardDataForm.get('remail').touched && giftCardDataForm.get('remail').invalid}"/>
+<div *ngIf ="giftCardDataForm.get('remail').touched && giftCardDataForm.get('remail').invalid" class="invalid-feedback">
+<div *ngIf="giftCardDataForm.get('remail').errors.required">Email is Required</div>
+<div *ngIf="giftCardDataForm.get('remail').errors.pattern">Email Must be a Valid Email Address</div>
+</div>
+</li>
+
+<li>
+  <p>Voucher Amount:</p>
+  <input type="text" for="vamount" formControlName="vamount"  class="field-style field-full align-none"  placeholder="Voucher Amount"
+  [ngClass]="{'is-invalid':giftCardDataForm.get('vamount').touched && giftCardDataForm.get('vamount').invalid}"/>
+  <div *ngIf ="giftCardDataForm.get('vamount').touched && giftCardDataForm.get('vamount').invalid" class="invalid-feedback">
+    <div *ngIf="giftCardDataForm.get('vamount').errors.required">Voucher Amount is Required</div>
+    <div *ngIf="giftCardDataForm.get('vamount').errors.pattern">Please Enter Positive Integer Value</div>
+    </div>
+
+</li>
+  <li>
+
+     <p>Wallet Balance: {{userData.wallet}}</p>
+
+  </li>
+  <li>
+    <p>Message:</p>
+  <textarea for="message" formControlName="message" class="field-style" placeholder="Message"  placeholder="Message"
+  [ngClass]="{'is-invalid':giftCardDataForm.get('message').touched && giftCardDataForm.get('message').invalid}"></textarea>
+  <div *ngIf ="giftCardDataForm.get('message').touched && giftCardDataForm.get('message').invalid" class="invalid-feedback">
+    <div *ngIf="giftCardDataForm.get('message').errors.required">Enter Message Please</div>
+    <div *ngIf="giftCardDataForm.get('message').errors.whitespace">Please don't put space only</div>
+  <!-- <div *ngIf ="giftCardDataForm.get('vamount').touched && giftCardDataForm.get('vamount').invalid" class="invalid-feedback"></div>
+  <div *ngIf="giftCardDataForm.get('message').errors.pattern">Message cannot contain space</div>
+  <div class="invalid-feedback">
+    <div>Enter Message Please</div> -->
+    <!-- </div> -->
+    </div>
+</li>
+  <li>
+    <input type="submit" (click)="onSubmit()"  [disabled]="( buttonVar)" value="Pay" class="field-style field-split align-right "/>
+    <input type="submit" (click)="addMoney()" [disabled]="(buttonVarAddAmount)"  value="Add Money" class="field-style field-split align-left"/>
+  </li>
+
+  </ul>
+
+</form>
+
+

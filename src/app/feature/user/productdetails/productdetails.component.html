@@ -1,0 +1,224 @@
+<!-- <div class="Display" *ngIf="product">
+        <div class="img">
+                <img [src]="product.imageUrl" class="img-fluid" alt="Responsive image" alt="Max-width 100%" alt="Max-width 50%">
+        </div>
+        <div class="name">{{product.productName}}</div>
+        <div class="des">{{product.description}}</div>
+        <div class="price">Price:{{product.price}}
+        <div class="stock">Quantity Left:{{product.stock}}</div>
+        <button type="button" (click)="onClick()" class="btn btn-primary">BUY</button>
+        </div>
+
+</div> -->
+<div class="center">
+
+  <div class="lds-grid" *ngIf="spinner">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+</div>
+
+<div *ngIf="product" class="container mt-4 mb-4">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="raw">
+        <img [src]="product.imageUrl" class="img-thumbnail" alt="Responsive image">
+
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="raw">
+        <h2>{{product.productName}}</h2>
+        <footer class="blockquote-footer">{{product.vendor}}</footer>
+      </div>
+      <div class="raw">
+        <h1 style="display:inline-block"><i class="fa fa-inr" aria-hidden="true"></i>{{total}}</h1>
+        <h6 style="display:inline-block">
+          <del>{{product.price}}</del>
+        </h6>
+        <h5 class="text-success" style="display:inline-block">{{product.discount}}% off</h5>
+      </div>
+      <div>
+        <!-- <h3 class="text-warning"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
+            aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+          <i class="fa fa-star-o" aria-hidden="true"></i>
+        </h3> -->
+        <div class="text-warning" *ngIf="product.ratingAvg === 1">
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+        </div>
+        <div class="text-warning" *ngIf="product.ratingAvg === 2">
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+        </div>
+        <div class="text-warning" *ngIf="product.ratingAvg === 3">
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" v></span>
+        </div>
+        <div class="text-warning" *ngIf="product.ratingAvg === 4">
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star " aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+        </div>
+        <div class="text-warning" *ngIf="product.ratingAvg === 5">
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+        </div>
+        <div class="text-warning" *ngIf="product.ratingAvg === 0">
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+        </div>
+
+      </div>
+      <!-- <div><p><i class="text-success fa fa-check-square-o" aria-hidden="true"></i></p></div> -->
+      <div class="raw">
+        <h6>Category: {{product.category}}</h6>
+        <p>Description:{{product.description}}</p>
+
+      </div>
+      <div class="stock" *ngIf="product.stock>0">
+        <i class="fa fa-bell" style="font-size:24px;color:firebrick ; display:inline-block"></i>
+        <h6> Only Left: {{product.stock}}</h6>
+      </div>
+      <div class="raw text-danger" *ngIf="product.stock<=0">
+        <strong> Out Of Stock .!!</strong>
+      </div>
+      <div class="butyon buy">
+        <button type="button" class="btn btn-primary " (click)=buyOption(product.productId) [disabled]="product.stock <=0">BUY</button>
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>INFO</h2>
+              <span class="close" (click)="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+              <div class="pt-1 pb-1">
+                You need to login first in order to buy a Gift Card
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="pt-1 pb-1">
+                <button mat-raised-button color="warn" (click)="redirectToLogin()">Go to Login</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="panel panel-default">
+        <h6>Previous Reviews & Rating :</h6>
+        <br>
+        <div style="height: auto; width: auto; border: 1px solid lightslategray; padding:15px">
+          <!-- <div*ngIf="feedbackDisplay === null">
+            There is No feed Back yet on this product
+          </div> -->
+          <div *ngIf=" feedbackDisplay.length == 0">
+            No Reviews And Rating is available Yet.
+          </div>
+          <div *ngFor="let feedback of feedbackDisplay">
+            User:&nbsp;{{feedback.name}}
+            <br>
+             Review:&nbsp;{{feedback.review}}
+            <br>
+            <!-- Rating:{{feedback.ratingPoint}}<span class="fa fa-star checked"></span> -->
+            <div class="text-warning" *ngIf="feedback.ratingPoint === 1">
+              Rating:&nbsp;
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star-o " aria-hidden="true"></span>
+              <span class="fa fa-star-o" aria-hidden="true"></span>
+              <span class="fa fa-star-o" aria-hidden="true"></span>
+              <span class="fa fa-star-o" aria-hidden="true"></span>
+            </div>
+            <div class="text-warning" *ngIf="feedback.ratingPoint === 2">
+              Rating:
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star-o" aria-hidden="true"></span>
+              <span class="fa fa-star-o" aria-hidden="true"></span>
+              <span class="fa fa-star-o" aria-hidden="true"></span>
+            </div>
+            <div class="text-warning" *ngIf="feedback.ratingPoint === 3">
+              Rating:
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star-o" aria-hidden="true"></span>
+              <span class="fa fa-star-o" aria-hidden="true"></span>
+            </div>
+            <div class="text-warning" *ngIf="feedback.ratingPoint === 4">
+              Rating:
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star-o" aria-hidden="true"></span>
+            </div>
+            <div class="text-warning" *ngIf="feedback.ratingPoint === 5">
+              Rating:
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+            </div>
+            <footer class="blockquote-footer">{{feedback.date | date:'yyyy-MM-dd'}}</footer>
+            <br>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <!-- <div class="col-md-6 mb-4">
+    <div class="panel panel-default">
+      <h6>Add Review:</h6>
+      <textarea id="text" rows="4" cols="30" placeholder="Yet to be taken up"></textarea><br>
+      <!----    <div class="col-md-6">
+                                        <div class="radio">
+                                                        <h6>Rating:</h6>
+                                                                <select id="Rating">
+                                                                  <option value="1">1<i class="text-warning fa fa-star" aria-hidden="true"></i></option>
+                                                                  <option value="2">2<i class="text-warning fa fa-star" aria-hidden="true"></i></option>
+                                                                  <option value="3">3<i class="text-warning fa fa-star" aria-hidden="true"></i></option>
+                                                                  <option value="4">4<i class="text-warning fa fa-star" aria-hidden="true"></i></option>
+                                                                  <option value="5">5<i class="text-warning fa fa-star" aria-hidden="true"></i></option>
+                                                                </select>
+                                        </div>
+                                </div>
+                        </div>
+                        <br>
+                        <button type="button" class="btn btn-success" disabled>Submit</button>
+                </div> -->
+  </div>
+</div>
+<div *ngIf="errorMessage" class="p-5">
+  <div class="alert alert-danger" role="alert">
+    <strong>Oh snap!</strong> Product not found....
+  </div>
+</div>

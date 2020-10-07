@@ -1,0 +1,31 @@
+.brand {
+  color: white;
+  background-color: #4360B5;
+  position: relative;
+}
+
+.toggleButton {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+}
+
+@media (min-width: 600px) {
+  .toggleButton {
+    display: none;
+  }
+
+  .dashboardList {
+    display: block;
+  }
+}
+
+.list-group-item {
+  transition: 0.2s ease-in-out;
+}
+
+.list-group-item:hover {
+  cursor: pointer;
+  background-color: rgb(243, 243, 243);
+}

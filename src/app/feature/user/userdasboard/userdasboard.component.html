@@ -1,0 +1,94 @@
+
+<div class="wrapper">
+<div class="sidebar">
+<app-profile></app-profile>
+</div>
+<div class="mat-elevation-z8 myContent">
+  <div class="mystyle" *ngIf="spinner">
+  <div class="spinner-grow text-muted"></div>
+<div class="spinner-grow text-primary"></div>
+<div class="spinner-grow text-success"></div>
+<div class="spinner-grow text-info"></div>
+<div class="spinner-grow text-warning"></div>
+<div class="spinner-grow text-danger"></div>
+<div class="spinner-grow text-secondary"></div>
+<div class="spinner-grow text-dark"></div>
+<div class="spinner-grow text-light"></div>
+  </div>
+ &nbsp; &nbsp;<mat-form-field>
+
+    <mat-label>Search</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search for orders here...">
+  </mat-form-field>
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="orderId">
+      <th mat-header-cell *matHeaderCellDef style="background-color: #4360B5; color:white" _ngcontent-c8="" mat-sort-header> <strong>OrderId</strong> </th>
+      <td mat-cell *matCellDef="let element"> {{element.orderId}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="userDate">
+      <th mat-header-cell *matHeaderCellDef style="background-color: #4360B5; color:white" _ngcontent-c8="" mat-sort-header><strong> Order Date</strong> </th>
+      <td mat-cell *matCellDef="let element"> {{element.userDate}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="productQuantity" [style.display]="'none'">
+      <th mat-header-cell *matHeaderCellDef [style.display]="'none'" style="background-color: #4360B5; color:white" _ngcontent-c8="" mat-sort-header><strong> Quantity</strong> </th>
+      <td mat-cell [style.display]="'none'" *matCellDef="let element"> {{element.productQuantity}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="productId" [style.display]="'none'">
+      <th mat-header-cell *matHeaderCellDef [style.display]="'none'" style="background-color: #4360B5;" _ngcontent-c8="" mat-sort-header><strong> ProductId</strong> </th>
+      <td mat-cell [style.display]="'none'" *matCellDef="let element"> {{element.productId}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="productName">
+      <th mat-header-cell *matHeaderCellDef style="background-color: #4360B5; color:white" _ngcontent-c8="" mat-sort-header> <strong>&nbsp;ProductName</strong></th>
+
+      <td mat-cell *matCellDef="let element"> &nbsp;&nbsp;{{element.productName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="vendor">
+      <th mat-header-cell *matHeaderCellDef  style="background-color: #4360B5; color:white" _ngcontent-c8="" mat-sort-header> <strong>&nbsp;&nbsp;Brand</strong> </th>
+      <td mat-cell *matCellDef="let element"> &nbsp;{{element.vendor}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef  style="background-color: #4360B5; color:white" _ngcontent-c8="" mat-sort-header> <strong>&nbsp;&nbsp;Amount</strong> </th>
+      <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions" >
+      <th mat-header-cell  *matHeaderCellDef style="background-color: #4360B5;color:white" _ngcontent-c8=""><strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actions</strong> </th>
+      <td mat-cell *matCellDef="let element" >
+         <div *ngIf=!element.feedback>
+        <button mat-button style="border: 2px solid #4360B5;
+           background-color: white;
+           color:black;
+           font-size: 10px solid;
+           cursor: pointer;" (click)="redirectFeedback(element.orderId,element.productId)">FeedBack</button>
+           </div>
+           <div *ngIf=element.feedback>
+            <span style="
+            background-color: white;
+            color:black;
+            font-size: 10px solid;" >Not Applicable</span>
+            </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+
+
+
+</div>

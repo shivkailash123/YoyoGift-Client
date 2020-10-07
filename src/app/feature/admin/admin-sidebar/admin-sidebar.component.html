@@ -1,0 +1,15 @@
+<div class="brand p-2 pl-3">
+  <h3>Admin</h3>
+</div>
+<span data-toggle="collapse" class="toggleButton" href="#dashboardList" aria-expanded="true"
+  aria-controls="dashboardList">
+  <i class="fa fa-bars text-white"></i>
+</span>
+<div class="dashboardList collapse" id="dashboardList" role="tabpanel">
+  <ul class="list-group">
+    <li class="list-group-item" (click)="redirectToProducts()"><i class="fa fa-shopping-bag" aria-hidden="true"></i>&nbsp;&nbsp;Products</li>
+    <li class="list-group-item" (click)="redirectToUsers()"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Users</li>
+    <li class="list-group-item" (click)="redirectToOrders()"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;&nbsp;Orders</li>
+    <li class="list-group-item" (click)="redirectToStatistics()"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp;&nbsp;Statistics</li>
+  </ul>
+</div>

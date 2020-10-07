@@ -1,0 +1,199 @@
+<!-- <!-- <div>
+    <form [formGroup]="FeedBackForm"(ng submit)="onSubmit()">
+        <div class="stars">
+            <input class="star star-5" id="star-5" type="radio" name="star"/>
+            <label class="star star-5" for="star-5"></label>
+            <input class="star star-4" id="star-4" type="radio" name="star"/>
+            <label class="star star-4" for="star-4"></label>
+            <input class="star star-3" id="star-3" type="radio" name="star"/>
+            <label class="star star-3" for="star-3"></label>
+            <input class="star star-2" id="star-2" type="radio" name="star"/>
+            <label class="star star-2" for="star-2"></label>
+            <input class="star star-1" id="star-1" type="radio" name="star"/>
+            <label class="star star-1" for="star-1"></label>
+        </div>
+        <div class="form-group">
+            <label style="font-size: 15px";for="comment">Please Provide Feedback:</label><br>
+            <textarea formContrilName="feedback"style="width: 50%;heigth:100%;" class="form-control"></textarea>
+            <input type="submit" value="submit" class="btn-btn-primary">
+        </div>
+    </form>
+</div> -->
+<!-- 
+<div class="center">
+    
+      <div class="lds-grid" *ngIf="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    
+    </div>
+    
+    
+    <div *ngIf="productDetail">
+    <form  class="form-style-9" novalidate [formGroup]="productDataForm">
+      <div class="alert alert-primary" role="alert" *ngIf="message">
+        <strong>Well done!</strong> {{message}}
+      </div>
+    
+      <div class="alert alert-danger" role="alert" *ngIf="errormessage">
+        <strong>Oh snap!</strong> {{errormessage}}
+      </div>
+      <ul>
+        <li>
+          <p>Rating:</p>
+           
+        <div *ngIf ="productDataForm.get('name').touched && productDataForm.get('name').invalid" class="invalid-feedback">
+          <div *ngIf="productDataForm.get('name').errors.required">Name is Required</div>
+          <div *ngIf="productDataForm.get('name').errors.pattern">Name Does not contain number or special charecter</div>
+          </div>
+      </li>   
+     <li>
+      <p>Address:*</p>
+    <textarea for="address" formControlName="address" class="field-style" placeholder="Enter Address"
+    [ngClass]="{'is-invalid':productDataForm.get('address').touched && productDataForm.get('address').invalid}"></textarea>
+    <div class="invalid-feedback">
+      <div>Enter Message Please</div>
+      </div>
+    </li>
+    <li>
+      <input type="submit" (click)="onSubmit()"  [disabled]="(buttonVar)" value="Pay"  class="field-style field-split align-right "/>
+      <input type="submit" value="Add Money" class="field-style field-split align-left"/>
+    </li>
+    
+      </ul>
+    </form>
+    
+    </div>
+     -->
+<div class="center">
+  <div class="lds-grid" *ngIf="spinner">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+<div *ngIf="productdisplay" class="container mt-4 mb-4">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="raw">
+        <img [src]="productdisplay.imageUrl" class="img-thumbnail" alt="Responsive image">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="raw">
+        <h2>{{productdisplay.productName}}</h2>
+        <footer class="blockquote-footer">{{productdisplay.vendor}}</footer>
+      </div>
+      <div class="raw">
+        <h1 style="display:inline-block"><i class="fa fa-inr" aria-hidden="true"></i>{{total}}</h1>
+        <h6 style="display:inline-block">
+          <del>{{productdisplay.price}}</del>
+        </h6>
+        <h5 class="text-success" style="display:inline-block">{{productdisplay.discount}}% off</h5>
+      </div>
+      <div>
+        <div class="text-warning" *ngIf="productdisplay.ratingAvg === 1">
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+        </div>
+        <div class="text-warning" *ngIf="productdisplay.ratingAvg === 2">
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+        </div>
+        <div class="text-warning" *ngIf="productdisplay.ratingAvg === 3">
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" v></span>
+        </div>
+        <div class="text-warning" *ngIf="productdisplay.ratingAvg === 4">
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star " aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+        </div>
+        <div class="text-warning" *ngIf="productdisplay.ratingAvg === 5">
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+          <span class="fa fa-star" aria-hidden="true"></span>
+        </div>
+        <div class="text-warning" *ngIf="productdisplay.ratingAvg === 0">
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+          <span class="fa fa-star-o" aria-hidden="true"></span>
+        </div>
+        <br>
+        <br>
+      </div>
+      <div>
+        <form [formGroup]="FeedBackForm" class="myform" (ngSubmit)="onSubmit()">
+          <div class="print">
+            <strong>Please Provide Rating:</strong>
+          </div>
+          <div class="stars">
+            <input formControlName="star" value="5" class="star star-5 " id="star-5" type="radio" name="star" />
+            <label class="star star-5 " for="star-5"></label>
+            <input formControlName="star" value="4" class="star star-4 " id="star-4" type="radio" name="star" />
+            <label class="star star-4 " for="star-4"></label>
+            <input formControlName="star" value="3" class="star star-3 " id="star-3" type="radio" name="star" />
+            <label class="star star-3 " for="star-3"></label>
+            <input formControlName="star" value="2" class="star star-2 " id="star-2" type="radio" name="star" />
+            <label class="star star-2 " for="star-2"></label>
+            <input formControlName="star" value="1" class="star star-1 " id="star-1" type="radio" name="star" />
+            <label class="star star-1 " for="star-1"></label>
+          </div>
+          <div class="form-group">
+            <label style="font-size: 15px;" for="comment"><strong>Please Provide Feedback:</strong></label><br>
+            <textarea formControlName="review" style="width: 50%;heigth:100%;" class="form-control" rows="5"></textarea>
+            <br>
+            <div class="button">
+              <button type="submit" [disabled]="!FeedBackForm.valid" class="btn btn-primary">
+                Submit <span *ngIf='loading' class="spinner-border spinner-border-sm mr-1"></span></button>
+            </div>
+            <div id="myModal" class="modal">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h2>INFO</h2>
+                  <span class="close" (click)="closeModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                  <div class="pt-1 pb-1">
+                    FeedBack Successfully Submitted
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <div class="pt-1 pb-1">
+                    <button mat-raised-button color="warn" (click)="redirectToUserDashboard()">Go to Profile</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="errorMessage" class="p-5">
+  <div class="alert alert-danger" role="alert">
+    <strong>Oh snap!</strong> {{errorMessage}}
+  </div>  
+</div>

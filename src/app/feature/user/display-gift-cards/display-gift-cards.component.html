@@ -1,0 +1,52 @@
+<div class="wrapper">
+
+  <div *ngIf="pageLoadingVar" class="stopPage">
+    <mat-spinner color="warn"></mat-spinner>
+  </div>
+  <div class="aside" *ngIf="!pageLoadingVar">
+    <app-profile [walletBalance] = "redeemedBalance"></app-profile>
+  </div>
+  <div class="main" *ngIf="!pageLoadingVar">
+    <div class="error" *ngIf="errorMessage">
+      <div class="alert alert-warning" role="alert">
+        <strong>Warning!</strong> {{errorMessage}}
+      </div>
+    </div>
+    <div class="content">
+
+      <mat-accordion multi="true">
+        <mat-expansion-panel *ngFor="let giftCard of giftCards; let i=index" class="mt-2">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <b><span class="icon-color"><i class="fa"
+                    [ngClass]="{'fa-envelope-open-o': giftCard.redeemed, 'fa-envelope': !giftCard.redeemed}"></i></span></b><span>&nbsp;&nbsp;{{giftCard.senderEmail}}</span>
+            </mat-panel-title>
+            <mat-panel-description>
+              <span class="disappearingText" *ngIf="giftCard.redeemed">Redeemed</span>
+              <span class="disappearingText" *ngIf="!giftCard.redeemed">Expiry :
+                {{giftCard.dateOfExpiry | date:'yyyy-MM-dd'}}
+              </span>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="accordianBox pt-3">
+            <div class="message">
+              <p><b class="icon-color">Message</b></p>
+              <p>{{giftCard.message}}</p>
+            </div>
+            <p class="amount"><b class="icon-color">Amount</b> : {{giftCard.amount}}</p>
+            <p class="from"><b class="icon-color">From : </b>{{giftCard.senderEmail}}</p>
+            <p class="issue"><b class="icon-color">Issue Date</b> &nbsp;&nbsp;:
+              {{giftCard.redeemedOn | date:'yyyy-MM-dd'}}</p>
+            <p class="expiry"><b class="text-danger">Expiry Date</b> : {{giftCard.dateOfExpiry | date:'yyyy-MM-dd'}}</p>
+          </div>
+          <mat-action-row *ngIf="!giftCard.redeemed">
+            <button mat-raised-button color="warn" (click)="redeemGiftCard(giftCard)">
+              <i class="fa fa-gift"></i>
+              &nbsp;&nbsp;Redeem Card</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+    </div>
+  </div>
+</div>

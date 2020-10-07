@@ -1,0 +1,82 @@
+<link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<link
+  rel="stylesheet"
+  href="http://use.fontawesome.com/releases/v5.0.8/css/all.css"
+/>
+<div class="container mb-5 mt-5">
+  <div class="card bg-light">
+    <div *ngIf="errorEnabled"class="alert alert-danger" role="alert"><strong>{{errorMessages}}</strong></div>
+    <div *ngIf="successEnabled"class="alert alert-success" role="alert">
+      <strong>{{successMessage}}</strong></div>
+    <article class="card-body mx-auto" style="max-width: 400px;">
+      <h4 class="card-title mt-3 text-center">Login Into Account</h4>
+      <p class="text-center">Get started with your YOYO-GIFT Account</p>
+      <p>
+        <button class="btn btn-block btn-twitter" (click)="signInWithGoogle()">
+          <i class="fab fa-google"></i>Login via Google
+          <span
+            *ngIf="Gloading"
+            class="spinner-border spinner-border-sm mr-1"
+          ></span>
+        </button>
+        <button class="btn btn-block btn-facebook" (click)="signInWithFB()">
+          <i class="fab fa-facebook"></i> Login via facebook
+          <span
+            *ngIf="Floading"
+            class="spinner-border spinner-border-sm mr-1"
+          ></span>
+        </button>
+      </p>
+      <p class="divider-text">
+        <span class="bg-light">OR</span>
+      </p>
+      <form [formGroup]="formdata" class="col-12" (ngSubmit)="onClickSubmit()">
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-envelope"></i>
+            </span>
+          </div>
+        <input type="email" class="form-control" placeholder="User Name" formControlName="emailId"
+    [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }" />
+    <div *ngIf="submitted && f.emailId.errors" class="invalid-feedback">
+        <div *ngIf="f.emailId.errors.required">User Name is required</div>
+    </div>
+    </div> <!-- form-group// -->
+
+  <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+    </div>
+    <input type="password" for class="form-control" placeholder="enter password"formControlName="password"[ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.pattern">Password Should be Atleast 8 charcters & Contain
+        One UpperCase,LowerCase,Number required,Special Character($@$!%*?&)</div>
+    </div>
+  </div>
+        <!-- form-group// -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">
+            Login
+            <span
+              *ngIf="loading"
+              class="spinner-border spinner-border-sm mr-1"
+            ></span>
+          </button>
+        </div>
+        <!-- form-group// -->
+        <p class="text-center">
+          Don't Have an account? <a routerLink="/profile/signup">Register</a>
+        </p>
+      </form>
+    </article>
+  </div>
+  <!-- card.// -->
+</div>

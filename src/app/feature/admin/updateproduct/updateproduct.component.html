@@ -1,0 +1,132 @@
+<div class="wrapper">
+  <div *ngIf="pageLoading" class="stopPage">
+    <mat-spinner color="warn"></mat-spinner>
+  </div>
+  <div class="dashboard mat-elevation-z8 rounded bg-white">
+    <app-admin-sidebar></app-admin-sidebar>
+  </div>
+  <div class="content mat-elevation-z8 rounded bg-white">
+    <div class="adminContent">
+      <div class="brand p-2 pl-3">
+        <h3 style="text-align: center;">Update Product&nbsp;</h3>
+      </div>
+      <div *ngIf="errorMessage" class="p-3">
+        <div class="alert alert-warning" role="alert">
+          <strong>Warning!</strong> {{errorMessage}}
+        </div>
+      </div>
+      <div class="parent">
+      <form class="AddProduct" novalidate [formGroup]='myform' style="display: inline-block;">
+          <div style="text-align:center;">
+          <mat-form-field appearance="outline" style="width: 600px;">
+            <mat-label>Product Name</mat-label>
+            <input matInput placeholder="Enter Product Name" formControlName="productName">
+            <mat-error *ngIf="productName.errors && (productName.dirty || productName.touched)">
+              <mat-error *ngIf="productName.errors.required">
+              Product Name is Required
+              </mat-error>
+              <mat-error *ngIf="productName.errors.pattern">
+                Product Name should be only Letters
+              </mat-error>
+              </mat-error>
+            </mat-form-field><br>
+            </div>
+
+            <div style="text-align:center;">
+            <mat-form-field appearance="outline" style="width: 600px;">
+              <mat-label>Price</mat-label>
+              <input matInput placeholder="Enter Price" formControlName="price" >
+              <mat-error *ngIf="price.errors && (price.dirty || price.touched)">
+              <mat-error *ngIf="price.errors.required">
+              Price is Required
+              </mat-error >
+              <mat-error *ngIf="price.errors.pattern">
+                Price Cannot be Zero or Start With Zero
+              </mat-error>
+              </mat-error>
+              </mat-form-field><br>
+              </div>
+              <div style="text-align:center;">
+              <mat-form-field appearance="outline" style="width: 600px;">
+                <mat-label>Category</mat-label>
+                <input matInput placeholder="Enter Category" formControlName="category">
+                <mat-error  *ngIf="category.errors && (category.dirty || category.touched)">
+                <mat-error *ngIf="category.errors.required">
+                  Category is required
+                </mat-error>
+                <mat-error *ngIf="category.errors.pattern">
+                  Category Can Contain Only Letters
+                </mat-error>
+                </mat-error>
+                </mat-form-field><br>
+                </div>
+                <div style="text-align:center;">
+                <mat-form-field appearance="outline" style="width: 600px;">
+                  <mat-label>Description</mat-label>
+                  <input matInput placeholder="Enter Description" formControlName="description">
+                  <mat-error  *ngIf="description.errors && (description.dirty || description.touched)">
+                  <mat-error *ngIf="description.errors.required">
+                    Description is required
+                  </mat-error>
+                  <mat-error *ngIf="description.errors.pattern">
+                    Description Should Contain Only Letters
+                  </mat-error>
+                  </mat-error>
+                  </mat-form-field><br>
+                  </div>
+                  <div style="text-align:center;">
+                  <mat-form-field appearance="outline" style="width: 600px;">
+                    <mat-label>Discount</mat-label>
+                    <input matInput placeholder="Enter Discount" formControlName="discount">
+                    <mat-error *ngIf="discount.errors && (discount.dirty || discount.touched)">
+                     <mat-error *ngIf="discount.errors.required">
+                      Discount is required
+                    </mat-error>
+                     <mat-error *ngIf="discount.errors.pattern">Discount cannot be more than 90% or Letter</mat-error>>
+                    </mat-error>
+                    </mat-form-field><br>
+                  </div>
+                  <div style="text-align:center;">
+                    <mat-form-field appearance="outline" style="width: 600px;">
+                      <mat-label>Stock</mat-label>
+                      <input matInput placeholder="Enter Stock" formControlName="stock">
+                     <mat-error *ngIf="stock.errors && (stock.dirty || stock.touched)">
+                    <mat-error *ngIf="stock.errors.required">Stock is required</mat-error>
+                    <mat-error *ngIf="stock.errors.pattern">Stock Cannot Letter</mat-error>
+                    </mat-error>
+                      </mat-form-field><br>
+                    </div>
+                    <div style="text-align:center;">
+                      <mat-form-field appearance="outline" style="width: 600px;"  style="width: 600px;">
+                        <mat-label>Image URL</mat-label>
+                        <input  matInput placeholder="Enter Image URl" formControlName="url" >
+                       <mat-error *ngIf="url.errors && (url.dirty || url.touched)">
+                    <mat-error *ngIf="url.errors.required">Image URL is required</mat-error>
+                    <mat-error *ngIf="url.errors.pattern">Image must be in .jpg/.png format</mat-error>
+                    </mat-error>
+                        </mat-form-field><br>
+                      </div>
+                      <div style="text-align:center;">
+                        <mat-form-field appearance="outline" style="width: 600px;">
+                          <mat-label>Vendor</mat-label>
+                          <input matInput placeholder="Enter vendor" formControlName="vendor">
+                       <mat-error   *ngIf="vendor.errors && (vendor.dirty || vendor.touched)">
+                    <mat-error *ngIf="vendor.errors.required">Vendor is required</mat-error>
+                    <mat-error *ngIf="vendor.errors.pattern">Vendor Cannot Be Number && Special Charcters</mat-error>
+                    </mat-error>
+                    </mat-form-field><br>
+                    <div class="form-group text-center">
+                    <button mat-raised-button color="primary" style="padding: 15px 50px; margin-bottom: 10px;" [disabled]='!myform.valid' (click)='onSubmit()'>UPDATE PRODUCT &nbsp;
+                    <span *ngIf="spinner"> <span class="spinner-border text-sucess"></span></span></button>
+                    </div>
+                  </div>
+</form>
+<div *ngIf="sucess">
+  <div class="alert alert-success alert-dismissible">
+    <strong>Wohoo!</strong> {{message}}
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="wrapper">
+  <div *ngIf="pageLoading" class="stopPage">
+    <mat-spinner color="warn"></mat-spinner>
+  </div>
+  <div class="dashboard mat-elevation-z8 rounded bg-white">
+    <app-admin-sidebar></app-admin-sidebar>
+  </div>
+  <div class="content mat-elevation-z8 rounded bg-white">
+    <div class="adminContent">
+      <div class="brand p-2 pl-3">
+        <h3>Statistics</h3>
+      </div>
+      <div *ngIf="errorMessage" class="p-3">
+        <div class="alert alert-warning" role="alert">
+          <strong>Warning!</strong> {{errorMessage}}
+        </div>
+      </div>
+      <div class="charts text-center mb-3">
+        <div class="topCharts">
+          <div class="chart1">
+            <h4 class="chartHeading" *ngIf="!pageLoading && !errorMessage">Product Count</h4>
+            <div id="chart1Warning"></div>
+            <canvas id="chart1"></canvas>
+          </div>
+          <div class="chart2">
+            <h4 class="chartHeading" *ngIf="!pageLoading && !errorMessage">Purchase Timeline</h4>
+            <div id="chart2Warning"></div>
+            <canvas id="chart2"></canvas>
+          </div>
+        </div>
+        <div class="bottomCharts mt-4">
+          <div class="chart3">
+            <h4 class="chartHeading" *ngIf="!pageLoading && !errorMessage">Sales Count</h4>
+            <div id="chart3Warning"></div>
+            <canvas id="chart3"></canvas>
+          </div>
+          <div class="chart4">
+            <h4 class="chartHeading" *ngIf="!pageLoading && !errorMessage">Sign Up Rate</h4>
+            <div id="chart4Warning"></div>
+            <canvas id="chart4"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
